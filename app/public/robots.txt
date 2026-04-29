@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://kisu.ru/sitemap.xml
+Host: https://kisu.ru

@@ -1,0 +1,16 @@
+Options -MultiViews
+RewriteEngine On
+
+# Serve existing files/directories as-is
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Don't rewrite /api/ requests
+RewriteRule ^api/ - [L]
+
+# Yandex Webmaster verification file (e.g. /yandex_01fa572144b2a41b.html)
+RewriteRule ^yandex_[a-z0-9]+\.html$ /api/yandex-verify.php [L,QSA]
+
+# Redirect everything else to index.html (React Router)
+RewriteRule ^ index.html [L]
