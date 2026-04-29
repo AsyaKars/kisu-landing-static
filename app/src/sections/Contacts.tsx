@@ -88,11 +88,16 @@ export default function Contacts() {
     const container = mapRef.current;
     if (!container) return;
     container.innerHTML = '';
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.async = true;
-    script.src = 'https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A27cd59f770aa5d3c1ebd38cb0b3756c075a3a5ecf82366f3a5e6e11837f599b0&width=100%25&height=490&lang=ru_RU&scroll=true';
-    container.appendChild(script);
+    const iframe = document.createElement('iframe');
+    // Plain Yandex map widget — no constructor, no preset marker.
+    const ll = `${OFFICE_COORDS[0]},${OFFICE_COORDS[1]}`;
+    iframe.src = `https://yandex.ru/map-widget/v1/?ll=${ll}&z=16&l=map&lang=ru_RU&scroll=true`;
+    iframe.style.width = '100%';
+    iframe.style.height = '490px';
+    iframe.style.border = '0';
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'fullscreen');
+    container.appendChild(iframe);
 
     return () => {
       container.innerHTML = '';
