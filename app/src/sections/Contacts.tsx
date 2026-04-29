@@ -91,7 +91,7 @@ export default function Contacts() {
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.async = true;
-    script.src = 'https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A27cd59f770aa5d3c1ebd38cb0b3756c075a3a5ecf82366f3a5e6e11837f599b0&width=100%25&height=450&lang=ru_RU&scroll=true';
+    script.src = 'https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A27cd59f770aa5d3c1ebd38cb0b3756c075a3a5ecf82366f3a5e6e11837f599b0&width=100%25&height=490&lang=ru_RU&scroll=true';
     container.appendChild(script);
 
     return () => {
@@ -202,8 +202,8 @@ export default function Contacts() {
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <div className="relative w-full" style={{ height: 450 }}>
-          <div ref={mapRef} className="w-full h-full" />
+        <div className="relative w-full overflow-hidden" style={{ height: 450 }}>
+          <div ref={mapRef} className="w-full h-full overflow-hidden" />
           {/* Custom orange tooltip overlaid at map center */}
           <a
             href={MAPS_ROUTE_URL}
