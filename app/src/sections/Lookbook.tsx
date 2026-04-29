@@ -16,11 +16,15 @@ type LookbookImageUi = {
 };
 
 const fallbackLookbookImages: LookbookImageUi[] = [
-  { mediaUrl: '/images/lookbook-1.jpg', caption: '' },
-  { mediaUrl: '/images/lookbook-2.jpg', caption: '' },
-  { mediaUrl: '/images/lookbook-4.jpg', caption: '' },
-  { mediaUrl: '/images/lookbook-5.jpg', caption: '' },
-  { mediaUrl: '/images/lookbook-6.jpg', caption: '' },
+  { mediaUrl: '/images/lb-699f9e724701a.jpg', caption: 'Яркая демисезонная куртка для мальчиков' },
+  { mediaUrl: '/images/lb-699e639f59dff.mp4', caption: '' },
+  { mediaUrl: '/images/lb-699f9e98dc72f.jpg', caption: '' },
+  { mediaUrl: '/images/lb-699f9e86dc53e.mp4', caption: '' },
+  { mediaUrl: '/images/lb-699f9ea7ea2d3.jpg', caption: '' },
+  { mediaUrl: '/images/lb-699f9eba452ba.mp4', caption: '' },
+  { mediaUrl: '/images/lb-699e63d66c76a.jpeg', caption: '' },
+  { mediaUrl: '/images/lb-699fa1756b3cf.mp4', caption: '' },
+  { mediaUrl: '/images/lb-699f9e4b23424.jpg', caption: '' },
 ];
 
 function isVideoUrl(url: string): boolean {

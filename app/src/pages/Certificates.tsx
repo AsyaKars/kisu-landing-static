@@ -13,6 +13,12 @@ type ApiCertificate = {
   is_active: boolean;
 };
 
+const FALLBACK_CERTIFICATES: ApiCertificate[] = [
+  { id: -1, title: 'Диплом "Лучшая одежда и аксессуары"', image_url: '/images/cert-diploma.jpg', order_index: 1, is_active: true },
+  { id: -2, title: 'Сертификат качества OEKO-TEX® STANDARD 100', image_url: '/images/cert-oeko-tex.jpg', order_index: 2, is_active: true },
+  { id: -3, title: 'Shelter Kids®', image_url: '/images/cert-shelter-kids.jpg', order_index: 3, is_active: true },
+];
+
 export default function Certificates() {
   const { data: apiCerts } = useApi<ApiCertificate[]>(API_ENDPOINTS.CERTIFICATES);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -46,7 +52,7 @@ export default function Certificates() {
       ? apiCerts
           .filter((c) => c.is_active && c.image_url)
           .sort((a, b) => a.order_index - b.order_index)
-      : [];
+      : FALLBACK_CERTIFICATES;
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
