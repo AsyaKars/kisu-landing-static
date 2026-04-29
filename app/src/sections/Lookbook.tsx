@@ -16,12 +16,11 @@ type LookbookImageUi = {
 };
 
 const fallbackLookbookImages: LookbookImageUi[] = [
-  { mediaUrl: '/images/lookbook-1.jpg', caption: 'Зимняя коллекция KISU - девочка в куртке' },
-  { mediaUrl: '/images/lookbook-2.jpg', caption: 'Демисезонная коллекция KISU - мальчик в парке' },
-  { mediaUrl: '/images/lookbook-3.jpg', caption: 'Зимние комбинезоны KISU' },
-  { mediaUrl: '/images/lookbook-4.jpg', caption: 'Детское пальто KISU' },
-  { mediaUrl: '/images/lookbook-5.jpg', caption: 'Жилет и куртка KISU' },
-  { mediaUrl: '/images/lookbook-6.jpg', caption: 'Семейная коллекция KISU' },
+  { mediaUrl: '/images/lookbook-1.jpg', caption: '' },
+  { mediaUrl: '/images/lookbook-2.jpg', caption: '' },
+  { mediaUrl: '/images/lookbook-4.jpg', caption: '' },
+  { mediaUrl: '/images/lookbook-5.jpg', caption: '' },
+  { mediaUrl: '/images/lookbook-6.jpg', caption: '' },
 ];
 
 function isVideoUrl(url: string): boolean {
