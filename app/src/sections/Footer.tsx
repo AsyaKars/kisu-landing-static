@@ -24,10 +24,7 @@ const navLinks = [
 ];
 
 const DEFAULT_SOCIAL: SocialLinkApi[] = [
-  { id: 1, platform: 'vk', url: '#', icon_name: 'vk', order_index: 1, is_active: true },
-  { id: 2, platform: 'telegram', url: '#', icon_name: 'telegram', order_index: 2, is_active: true },
-  { id: 3, platform: 'rutube', url: '#', icon_name: 'rutube', order_index: 3, is_active: true },
-  { id: 4, platform: 'max', url: '#', icon_name: 'max', order_index: 4, is_active: true },
+  { id: 1, platform: 'vk', url: 'https://vk.com/kisuofficial', icon_name: 'vk', order_index: 1, is_active: true },
 ];
 
 function SocialIcon({ platform }: { platform: string }) {
@@ -74,7 +71,7 @@ export default function Footer() {
   const getSetting = (key: string, fallback: string) =>
     (settings ?? []).find((s) => s.setting_key === key)?.setting_value || fallback;
 
-  const logoUrl = getSetting('logo_url', '');
+  const logoUrl = getSetting('logo_url', '/images/logo.svg');
   const footerDescription = getSetting(
     'footer_description',
     'Российский производитель детской зимней одежды. Создаём тепло и комфорт для ваших детей с 2017 года.'

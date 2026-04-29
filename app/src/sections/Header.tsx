@@ -24,7 +24,7 @@ export default function Header({ onPartnerClick, forceScrolled = false }: Header
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { data: settings } = useApi<SiteSetting[]>(API_ENDPOINTS.SETTINGS);
-  const logoUrl = (settings ?? []).find((s) => s.setting_key === 'logo_url')?.setting_value ?? '';
+  const logoUrl = (settings ?? []).find((s) => s.setting_key === 'logo_url')?.setting_value ?? '/images/logo.svg';
 
   useEffect(() => {
     const handleScroll = () => {
