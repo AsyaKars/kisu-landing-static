@@ -6,17 +6,35 @@
  * Edit values here and re-upload to the server to apply.
  */
 
-// Comma-separated list of email addresses that will receive partnership form
-// submissions. Example: 'sales@example.com,manager@example.com'
+// Куда слать заявки. Несколько адресов — через запятую внутри одних кавычек.
 const PARTNER_FORM_RECIPIENTS = '';
 
-// Sender address used in the From: header. Most shared hosts require this to
-// be on your domain (e.g. 'no-reply@example.com'). If left empty, the first
-// recipient address is used as the sender.
+// От кого слать (адрес на твоём домене). Если пусто — берём первого получателя.
 const PARTNER_FORM_FROM = '';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Helpers used by partner-form.php — do not edit unless you know what you do
+// SMTP (рекомендуется на shared-хостингах вроде TimeWeb, где mail() блокирована)
+// Заполни SMTP_HOST + SMTP_USER + SMTP_PASS — и письма пойдут через SMTP.
+// Если SMTP_HOST пустой — будет использоваться функция mail().
+// ─────────────────────────────────────────────────────────────────────────────
+
+// SMTP-сервер. Для TimeWeb обычно 'smtp.timeweb.ru'.
+const SMTP_HOST   = '';
+
+// 465 = SSL, 587 = STARTTLS.
+const SMTP_PORT   = 465;
+
+// 'ssl' (для 465) или 'tls' (для 587).
+const SMTP_SECURE = 'ssl';
+
+// Логин ящика — обычно полный email, например 'support@kisu.ru'.
+const SMTP_USER   = '';
+
+// Пароль ящика (тот, что ты задавала при создании в панели «Почта»).
+const SMTP_PASS   = '';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Helpers used by partner-form.php — do not edit
 // ─────────────────────────────────────────────────────────────────────────────
 
 function sendJson(array $payload, int $code = 200): void {
