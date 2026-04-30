@@ -100,7 +100,9 @@ try {
         $fromEmail = $recipients[0];
     }
 
-    $from    = 'KISU =?UTF-8?B?' . base64_encode('Сайт') . '?= <' . $fromEmail . '>';
+    // TimeWeb and several other shared hosts reject mail() if the From header
+    // has an encoded display name. Plain "<email>" is the safest format.
+    $from    = $fromEmail;
     $subject = '=?UTF-8?B?' . base64_encode('Новая заявка на партнёрство — KISU') . '?=';
 
     $body  = "Новая заявка на партнёрство с сайта KISU\r\n";
@@ -122,24 +124,45 @@ try {
         $headers .= 'Reply-To: ' . $clientEmail . "\r\n";
     }
 
-    // 5th-arg envelope sender breaks on some shared hosts.
-    // Try with -f first; if it fails, retry without it.
+    // Try several flavours of mail() — different shared hosts demand
+    // different combinations of headers and the -f envelope sender.
     $allOk = true;
+    $lastErr = '';
     foreach ($recipients as $recipient) {
-        $sent = @mail($recipient, $subject, $body, $headers, '-f ' . $fromEmail);
-        if (!$sent) {
-            $sent = @mail($recipient, $subject, $body, $headers);
+        $sent = false;
+        $attempts = [
+            // (1) plain headers + envelope sender
+            ['hdr' => $headers, 'env' => '-f' . $fromEmail],
+            // (2) plain headers, no envelope sender
+            ['hdr' => $headers, 'env' => null],
+            // (3) minimal headers (some hosts strip everything but From)
+            ['hdr' => 'From: ' . $fromEmail . "\r\nMIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\n", 'env' => null],
+        ];
+        foreach ($attempts as $a) {
+            error_clear_last();
+            if ($a['env'] !== null) {
+                $sent = @mail($recipient, $subject, $body, $a['hdr'], $a['env']);
+            } else {
+                $sent = @mail($recipient, $subject, $body, $a['hdr']);
+            }
+            if ($sent) break;
+            $e = error_get_last();
+            if ($e && !empty($e['message'])) $lastErr = $e['message'];
         }
         if (!$sent) {
             $allOk = false;
-            error_log('[KISU partner-form] mail() failed for recipient: ' . $recipient);
+            error_log('[KISU partner-form] mail() failed for ' . $recipient . ' last error: ' . $lastErr);
         }
     }
 
     if (!$allOk) {
         http_response_code(500);
         echo json_encode(
-            ['error' => 'Не удалось отправить письмо. Проверьте, что в api/config.php в PARTNER_FORM_FROM указан адрес на этом домене.'],
+            [
+                'error'  => 'Не удалось отправить письмо через mail(). На TimeWeb обычно нужен SMTP.',
+                'detail' => $lastErr ?: 'mail() returned false',
+                'hint'   => 'В панели TimeWeb → Почта → Настройка SMTP. Если не помогает — пришли разработчику текст из поля detail.',
+            ],
             JSON_UNESCAPED_UNICODE
         );
         exit;
