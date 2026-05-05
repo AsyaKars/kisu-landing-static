@@ -4,86 +4,15 @@ import Footer from '@/sections/Footer';
 import { useApi } from '@/hooks/use-api';
 import { API_ENDPOINTS } from '@/config/api';
 
-/* ── Laundry symbol SVGs ───────────────────────────────────── */
-
-function IconWash30() {
-  return (
-    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-16 sm:h-16">
-      <path d="M8 20 L12 48 H52 L56 20 Z" stroke="#FF6B35" strokeWidth="2.5" fill="none" strokeLinejoin="round" />
-      <path d="M6 20 H58" stroke="#FF6B35" strokeWidth="2.5" strokeLinecap="round" />
-      <text x="32" y="40" textAnchor="middle" fontSize="13" fontWeight="700" fill="#FF6B35" fontFamily="Arial, sans-serif">30°</text>
-    </svg>
-  );
-}
-
-function IconNoBleach() {
-  return (
-    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-16 sm:h-16">
-      <path d="M32 8 L58 52 H6 Z" stroke="#FF6B35" strokeWidth="2.5" fill="none" strokeLinejoin="round" strokeLinecap="round" />
-      <line x1="16" y1="18" x2="48" y2="50" stroke="#FF6B35" strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="48" y1="18" x2="16" y2="50" stroke="#FF6B35" strokeWidth="2.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function IconNoTumbleDry() {
-  return (
-    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-16 sm:h-16">
-      <rect x="8" y="8" width="48" height="48" rx="4" stroke="#FF6B35" strokeWidth="2.5" fill="none" />
-      <circle cx="32" cy="32" r="14" stroke="#FF6B35" strokeWidth="2.5" fill="none" />
-      <line x1="14" y1="14" x2="50" y2="50" stroke="#FF6B35" strokeWidth="2.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function IconNoDryClean() {
-  return (
-    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-16 sm:h-16">
-      <circle cx="32" cy="32" r="24" stroke="#FF6B35" strokeWidth="2.5" fill="none" />
-      <line x1="15" y1="15" x2="49" y2="49" stroke="#FF6B35" strokeWidth="2.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function IconIron110() {
-  return (
-    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-16 sm:h-16">
-      {/* Iron body */}
-      <path d="M6 38 H46 Q58 38 58 28 Q58 22 50 22 H22 L10 22 Q6 22 6 28 Z"
-        stroke="#FF6B35" strokeWidth="2.5" fill="none" strokeLinejoin="round" />
-      {/* Handle */}
-      <path d="M20 22 L20 14 Q20 10 26 10 L38 10 Q44 10 44 14 L44 22"
-        stroke="#FF6B35" strokeWidth="2.5" fill="none" strokeLinejoin="round" />
-      {/* One dot = 110°C */}
-      <circle cx="32" cy="32" r="2.5" fill="#FF6B35" />
-    </svg>
-  );
-}
-
-function IconNoSteam() {
-  return (
-    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-16 sm:h-16">
-      {/* Iron body */}
-      <path d="M6 38 H46 Q58 38 58 28 Q58 22 50 22 H22 L10 22 Q6 22 6 28 Z"
-        stroke="#FF6B35" strokeWidth="2.5" fill="none" strokeLinejoin="round" />
-      <path d="M20 22 L20 14 Q20 10 26 10 L38 10 Q44 10 44 14 L44 22"
-        stroke="#FF6B35" strokeWidth="2.5" fill="none" strokeLinejoin="round" />
-      {/* X cross */}
-      <line x1="14" y1="46" x2="52" y2="16" stroke="#FF6B35" strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="14" y1="16" x2="52" y2="46" stroke="#FF6B35" strokeWidth="2.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-/* ── Fallback data ─────────────────────────────────────────── */
+/* ── Care rule icon paths ──────────────────────────────────── */
 
 const CARE_RULE_ICONS = [
-  <IconWash30 />,
-  <IconNoBleach />,
-  <IconNoTumbleDry />,
-  <IconNoDryClean />,
-  <IconIron110 />,
-  <IconNoSteam />,
+  '/images/care-01.png',
+  '/images/care-02.png',
+  '/images/care-03.png',
+  '/images/care-04.png',
+  '/images/care-05.png',
+  '/images/care-06.png',
 ];
 
 const DEFAULT_CARE_RULES = [
@@ -162,7 +91,7 @@ export default function Care() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <Header onPartnerClick={() => {}} forceScrolled />
+      <Header forceScrolled />
 
       <main className="flex-1 w-full px-4 sm:px-6 lg:px-12 xl:px-20 py-32 lg:py-40">
         <div className="max-w-4xl mx-auto">
@@ -196,7 +125,7 @@ export default function Care() {
                   key={i}
                   className="bg-white rounded-xl p-3 sm:p-5 flex flex-col items-center text-center gap-2 sm:gap-4"
                 >
-                  {CARE_RULE_ICONS[i]}
+                  <img src={CARE_RULE_ICONS[i]} alt="" className="w-10 h-10 sm:w-16 sm:h-16" />
                   <p className="text-kisu-text-gray text-[11px] leading-snug sm:text-xs sm:leading-relaxed">{text}</p>
                 </div>
               ))}

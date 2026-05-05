@@ -15,12 +15,12 @@ type ApiCategory = {
 };
 
 const DEFAULT_CATEGORIES = [
-  { label: 'Зимние куртки', description: 'Тёплые и яркие куртки для девочек и мальчиков', image_url: '/images/assortment.jpg' },
-  { label: 'Демисезонные парки', description: 'Универсальные парки для весны и осени', image_url: '/images/assortment.jpg' },
-  { label: 'Комбинезоны', description: 'Удобные комбинезоны для малышей от 1 года', image_url: '/images/assortment.jpg' },
-  { label: 'Жилеты', description: 'Лёгкие жилеты для активного отдыха', image_url: '/images/assortment.jpg' },
-  { label: 'Брюки и полукомбинезоны', description: 'Практичные брюки для любой погоды', image_url: '/images/assortment.jpg' },
-  { label: 'Аксессуары', description: 'Шапки, перчатки и другие аксессуары', image_url: '/images/assortment.jpg' },
+  { label: 'Зимние куртки', description: 'Тёплые и яркие куртки для девочек и мальчиков', image_url: '/images/assortment-jackets.jpg' },
+  { label: 'Парки', description: 'Универсальные парки для весны и осени', image_url: '/images/assortment-parkas.jpg' },
+  { label: 'Комбинезоны', description: 'Удобные комбинезоны для малышей от 1 года', image_url: '/images/assortment-coveralls.jpg' },
+  { label: 'Пальто', description: 'Модные и стильные пальто для девочек', image_url: '/images/assortment-coats.jpg' },
+  { label: 'Брюки и полукомбинезоны', description: 'Практичные брюки для любой погоды', image_url: '/images/assortment-pants.jpg' },
+  { label: 'Аксессуары', description: 'Шапки и варежки', image_url: '/images/assortment-accessories.jpg' },
 ];
 
 export default function Assortment() {
@@ -95,6 +95,7 @@ export default function Assortment() {
                   <div
                     key={index}
                     onMouseEnter={() => setHoveredIndex(index)}
+                    onClick={() => setHoveredIndex(index)}
                     className={`p-4 rounded-xl cursor-pointer transition-all duration-300 hover:-translate-y-1 ${
                       isActive
                         ? 'bg-kisu-orange shadow-kisu'
@@ -102,7 +103,7 @@ export default function Assortment() {
                     } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                     style={{ transitionDelay: `${400 + index * 80}ms` }}
                   >
-                    <h3 className={`font-heading font-semibold mb-2 transition-colors duration-300 ${
+                    <h3 className={`font-heading font-semibold text-sm sm:text-base mb-1 transition-colors duration-300 ${
                       isActive ? 'text-white' : 'text-kisu-text-dark'
                     }`}>
                       {category.label === 'Брюки и полукомбинезоны' ? (
@@ -115,7 +116,7 @@ export default function Assortment() {
                       )}
                     </h3>
                     {category.description && (
-                      <p className={`hidden lg:block text-sm leading-relaxed transition-colors duration-300 ${
+                      <p className={`text-xs sm:text-sm leading-relaxed transition-colors duration-300 ${
                         isActive ? 'text-white/80' : 'text-kisu-text-gray'
                       }`}>
                         {category.description}

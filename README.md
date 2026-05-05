@@ -54,15 +54,3 @@ npm run build      # сборка в app/dist
 └── sitemap.xml
 ```
 
-## Что осталось от оригинала
-
-* React + Vite + TypeScript + Tailwind, все секции лендинга
-* Карта в секции «Контакты» через виджет‑конструктор Яндекс.Карт (без API‑ключа)
-* Форма заявки партнёра (POST `/api/partner-form.php` → `mail()`)
-* Страницы: `/sizes`, `/care`, `/certificates`, `/privacy`, `/personal-data`
-
-## Что убрано
-
-* Админ‑панель на `/admin`
-* Все эндпоинты `/api/auth/`, `/api/content/`, `/api/upload.php`, `/api/partner-requests.php`, `/api/yandex-verify.php`
-* Зависимость от MySQL — БД не нужна

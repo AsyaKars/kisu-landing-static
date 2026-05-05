@@ -62,8 +62,6 @@ export default function Cooperation({ isFormOpen, setIsFormOpen }: CooperationPr
     (settings ?? []).find((s) => s.setting_key === 'cooperation_subtitle')?.setting_value ||
     'Оптовым покупателям мы предлагаем выгодные условия сотрудничества и полную поддержку на всех этапах работы';
 
-  const logoUrl = (settings ?? []).find((s) => s.setting_key === 'logo_url')?.setting_value || null;
-
   const resetForm = () => {
     setIsSubmitted(false);
     setConsent(false);
@@ -180,23 +178,10 @@ export default function Cooperation({ isFormOpen, setIsFormOpen }: CooperationPr
       {/* Partner Form Modal */}
       <Dialog open={isFormOpen} onOpenChange={(open) => { setIsFormOpen(open); if (!open) resetForm(); }}>
         <DialogContent className="sm:max-w-lg">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-heading font-bold text-kisu-text-dark">
-              Стать партнёром
-            </DialogTitle>
-            <DialogDescription className="text-kisu-text-gray">
-              Заполните форму ниже, и мы свяжемся с вами в ближайшее время
-            </DialogDescription>
-          </DialogHeader>
-
           {isSubmitted ? (
             <div className="py-6 flex flex-col items-center text-center gap-4">
               {/* Логотип */}
-              {logoUrl ? (
-                <img src={logoUrl} alt="KISU" className="h-10 w-auto object-contain" />
-              ) : (
-                <span className="font-heading font-bold text-2xl tracking-widest text-kisu-orange">KISU</span>
-              )}
+              <img src="/images/logo.svg" alt="KISU" className="h-10 w-auto object-contain" />
 
               {/* Иконка успеха */}
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-kisu-orange/10 border-2 border-kisu-orange/25">
@@ -214,10 +199,6 @@ export default function Cooperation({ isFormOpen, setIsFormOpen }: CooperationPr
                 Наш менеджер свяжется с вами в ближайшее рабочее время и с удовольствием ответит на все вопросы.
               </p>
 
-              <p className="text-sm text-kisu-orange/80 font-medium italic">
-                Вместе создадим тёплый гардероб для детей&nbsp;🧤
-              </p>
-
               {/* Кнопка закрыть */}
               <Button
                 type="button"
@@ -228,6 +209,15 @@ export default function Cooperation({ isFormOpen, setIsFormOpen }: CooperationPr
               </Button>
             </div>
           ) : (
+            <>
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-heading font-bold text-kisu-text-dark">
+                Стать партнёром
+              </DialogTitle>
+              <DialogDescription className="text-kisu-text-gray">
+                Заполните форму ниже, и мы свяжемся с вами в ближайшее время
+              </DialogDescription>
+            </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4 mt-4">
               {submitError && (
                 <div className="p-3 bg-red-50 text-red-700 rounded-md text-sm">{submitError}</div>
@@ -321,6 +311,7 @@ export default function Cooperation({ isFormOpen, setIsFormOpen }: CooperationPr
                 {submitting ? 'Отправка...' : 'Отправить заявку'}
               </Button>
             </form>
+            </>
           )}
         </DialogContent>
       </Dialog>

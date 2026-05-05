@@ -15,10 +15,9 @@ type ApiCertificate = {
 };
 
 const DEFAULT_CERTIFICATES = [
-  { icon: 'Award', label: 'Сертификат соответствия ГОСТ', image_url: '/images/quality.jpg' },
-  { icon: 'Shield', label: 'Сертификат безопасности', image_url: '/images/quality.jpg' },
-  { icon: 'ThumbsUp', label: 'Награда "Лучший бренд 2023"', image_url: '/images/quality.jpg' },
-  { icon: 'FileCheck', label: 'Сертификат качества ТР ТС', image_url: '/images/quality.jpg' },
+  { icon: 'Award', label: 'Диплом "Лучшая одежда и аксессуары"', image_url: '/images/cert-diploma.jpg' },
+  { icon: 'ThumbsUp', label: 'Сертификат качества OEKO-TEX® STANDARD 100', image_url: '/images/cert-oeko-tex.jpg' },
+  { icon: 'Shield', label: 'Shelter Kids®', image_url: '/images/cert-shelter-kids.jpg' },
 ];
 
 export default function Quality() {
@@ -105,6 +104,7 @@ export default function Quality() {
                   <div
                     key={index}
                     onMouseEnter={() => setHoveredIndex(index)}
+                    onClick={() => setHoveredIndex(index)}
                     className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer transition-all duration-300 hover:-translate-y-1 ${
                       isActive
                         ? 'bg-kisu-orange shadow-kisu'

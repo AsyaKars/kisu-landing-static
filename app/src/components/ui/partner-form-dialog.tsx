@@ -59,28 +59,37 @@ export function PartnerFormDialog({ isOpen, onClose }: PartnerFormDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-lg">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-heading font-bold text-kisu-text-dark">
-            Стать партнёром
-          </DialogTitle>
-          <DialogDescription className="text-kisu-text-gray">
-            Заполните форму ниже, и мы свяжемся с вами в ближайшее время
-          </DialogDescription>
-        </DialogHeader>
-
         {isSubmitted ? (
-          <div className="py-8 text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
-              <CheckCircle2 className="w-8 h-8 text-green-600" />
+          <div className="py-6 flex flex-col items-center text-center gap-4">
+            <img src="/images/logo.svg" alt="KISU" className="h-10 w-auto object-contain" />
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-kisu-orange/10 border-2 border-kisu-orange/25">
+              <CheckCircle2 className="w-10 h-10 text-kisu-orange" />
             </div>
-            <h3 className="text-xl font-heading font-semibold text-kisu-text-dark mb-2">
-              Заявка отправлена!
+            <h3 className="text-2xl font-heading font-bold text-kisu-text-dark">
+              Спасибо за заявку!
             </h3>
-            <p className="text-kisu-text-gray">
-              Мы свяжемся с вами в ближайшее время
+            <p className="text-kisu-text-gray text-base leading-relaxed max-w-xs">
+              Мы очень рады, что вы выбрали <span className="text-kisu-orange font-semibold">KISU</span>!
+              Наш менеджер свяжется с вами в ближайшее рабочее время и с удовольствием ответит на все вопросы.
             </p>
+            <button
+              type="button"
+              onClick={onClose}
+              className="mt-2 bg-kisu-orange hover:bg-kisu-orange-dark text-white font-medium px-10 py-2.5 rounded-full transition-all duration-300"
+            >
+              Закрыть
+            </button>
           </div>
         ) : (
+          <>
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-heading font-bold text-kisu-text-dark">
+              Стать партнёром
+            </DialogTitle>
+            <DialogDescription className="text-kisu-text-gray">
+              Заполните форму ниже, и мы свяжемся с вами в ближайшее время
+            </DialogDescription>
+          </DialogHeader>
           <form onSubmit={handleSubmit} className="space-y-4 mt-4">
             <div>
               <Label htmlFor="companyName" className="text-kisu-text-dark">
@@ -153,6 +162,7 @@ export function PartnerFormDialog({ isOpen, onClose }: PartnerFormDialogProps) {
               Отправить заявку
             </Button>
           </form>
+          </>
         )}
       </DialogContent>
     </Dialog>

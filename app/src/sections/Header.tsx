@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, PawPrint } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { PartnerFormDialog } from '@/components/ui/partner-form-dialog';
 import { useApi } from '@/hooks/use-api';
 import { API_ENDPOINTS } from '@/config/api';
 
 type SiteSetting = { id: number; setting_key: string; setting_value: string };
 
 interface HeaderProps {
-  onPartnerClick: () => void;
+  onPartnerClick?: () => void;
   forceScrolled?: boolean;
 }
 
@@ -23,6 +24,9 @@ const navItems = [
 export default function Header({ onPartnerClick, forceScrolled = false }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isOwnFormOpen, setIsOwnFormOpen] = useState(false);
+
+  const handlePartnerClick = onPartnerClick ?? (() => setIsOwnFormOpen(true));
   const { data: settings } = useApi<SiteSetting[]>(API_ENDPOINTS.SETTINGS);
   const logoUrl = (settings ?? []).find((s) => s.setting_key === 'logo_url')?.setting_value ?? '/images/logo.svg';
 
@@ -41,10 +45,10 @@ export default function Header({ onPartnerClick, forceScrolled = false }: Header
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      setIsMobileMenuOpen(false);
     } else {
-      window.location.href = '/' + href;
+      window.location.assign('/' + href);
     }
-    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -122,7 +126,7 @@ export default function Header({ onPartnerClick, forceScrolled = false }: Header
               +7 (495) 640-19-83
             </a>
             <Button
-              onClick={onPartnerClick}
+              onClick={handlePartnerClick}
               className="bg-kisu-orange hover:bg-kisu-orange-dark text-white font-medium px-6 py-2 rounded-full transition-all duration-300 hover:shadow-kisu hover:scale-105"
             >
               Стать партнёром
@@ -163,6 +167,17 @@ export default function Header({ onPartnerClick, forceScrolled = false }: Header
               {item.label}
             </a>
           ))}
+          <div className="border-t border-gray-100 py-2">
+            <a href="/sizes" className="block px-6 py-3 font-heading font-semibold text-kisu-text-dark hover:bg-kisu-bg-warm hover:text-kisu-orange transition-colors duration-200">
+              Таблица размеров
+            </a>
+            <a href="/care" className="block px-6 py-3 font-heading font-semibold text-kisu-text-dark hover:bg-kisu-bg-warm hover:text-kisu-orange transition-colors duration-200">
+              Правила ухода
+            </a>
+            <a href="/certificates" className="block px-6 py-3 font-heading font-semibold text-kisu-text-dark hover:bg-kisu-bg-warm hover:text-kisu-orange transition-colors duration-200">
+              Сертификаты
+            </a>
+          </div>
           <div className="px-6 py-4 border-t border-gray-100">
             <a
               href="tel:+74956401983"
@@ -172,7 +187,7 @@ export default function Header({ onPartnerClick, forceScrolled = false }: Header
               +7 (495) 640-19-83
             </a>
             <Button
-              onClick={onPartnerClick}
+              onClick={handlePartnerClick}
               className="w-full bg-kisu-orange hover:bg-kisu-orange-dark text-white font-medium py-3 rounded-full"
             >
               Стать партнёром
@@ -180,6 +195,9 @@ export default function Header({ onPartnerClick, forceScrolled = false }: Header
           </div>
         </nav>
       </div>
+      {!onPartnerClick && (
+        <PartnerFormDialog isOpen={isOwnFormOpen} onClose={() => setIsOwnFormOpen(false)} />
+      )}
     </header>
   );
 }

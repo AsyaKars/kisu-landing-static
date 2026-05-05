@@ -78,6 +78,15 @@ function LandingPage() {
     setIsFormOpen(true);
   };
 
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.slice(1);
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <SiteMetaTags />

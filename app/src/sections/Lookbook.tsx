@@ -16,7 +16,7 @@ type LookbookImageUi = {
 };
 
 const fallbackLookbookImages: LookbookImageUi[] = [
-  { mediaUrl: '/images/lb-699f9e724701a.jpg', caption: 'Яркая демисезонная куртка для мальчиков' },
+  { mediaUrl: '/images/lb-699f9e724701a.jpg', caption: '' },
   { mediaUrl: '/images/lb-699e639f59dff.mp4', caption: '' },
   { mediaUrl: '/images/lb-699f9e98dc72f.jpg', caption: '' },
   { mediaUrl: '/images/lb-699f9e86dc53e.mp4', caption: '' },
@@ -114,7 +114,7 @@ export default function Lookbook() {
               key={`${item.mediaUrl}-${index}`}
               className={`group relative aspect-[4/5] overflow-hidden rounded-xl cursor-pointer transition-all duration-500 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
+              } ${index === lookbookImages.length - 1 ? 'hidden lg:block' : ''}`}
               style={{ transitionDelay: `${200 + index * 100}ms` }}
               onClick={() => setSelectedIndex(index)}
             >

@@ -85,7 +85,7 @@ export default function PersonalData() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <Header onPartnerClick={() => {}} forceScrolled />
+      <Header forceScrolled />
 
       <main className="flex-1 w-full px-4 sm:px-6 lg:px-12 xl:px-20 py-32 lg:py-40">
         <div className="max-w-3xl mx-auto">
